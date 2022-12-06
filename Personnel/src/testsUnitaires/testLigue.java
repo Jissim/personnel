@@ -56,6 +56,7 @@ class testLigue
 		assertEquals(admin, ligue.getAdministrateur());
 		
 	}
+	
 	@Test
 	void testGetEmploye () throws SauvegardeImpossible
 	{
@@ -65,5 +66,25 @@ class testLigue
 		assertEquals(employe, ligue.getEmployes().first());
         assertEquals(admin, ligue.getEmployes().last());
 	}
-
+	@Test
+	void TestRemove() throws SauvegardeImpossible
+    {
+        Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+        Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
+        employe.remove();
+        assertEquals(0, ligue.getEmployes().size());
+    }
+	@Test
+    void TestCompareTo() throws SauvegardeImpossible
+    {
+        Ligue flechettes = gestionPersonnel.addLigue("Basketball");
+        Ligue basketball = gestionPersonnel.addLigue("Basketball");
+        assertEquals(0, basketball.compareTo(flechettes));
+    }
+	@Test
+    void TestToString() throws SauvegardeImpossible
+    {
+        Ligue basketball = gestionPersonnel.addLigue("Basketball");
+        assertEquals("Basketball", basketball.toString());
+    }
 }
