@@ -1,12 +1,13 @@
-package testsUnitaires;
+ package testsUnitaires;
 
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import personnel.*;
 
-class testLigue 
+class TestLigue 
 {
+	
 	GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	
 	@Test
@@ -23,68 +24,77 @@ class testLigue
 		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty"); 
 		assertEquals(employe, ligue.getEmployes().first());
 	}
+
 	@Test
-	void testGetNom() throws SauvegardeImpossible
-	{
-		Ligue ligue = gestionPersonnel.addLigue("");
-		ligue.setNom("Fléchettes");
-		assertEquals("Fléchettes", ligue.getNom());
-	}	
-	@Test
-	void testSetNom() throws SauvegardeImpossible
+	void GetNom ()throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
 		assertEquals("Fléchettes", ligue.getNom());
-
 	}
-	@Test
-	void testGetAdministrateur() throws SauvegardeImpossible
-	{
-		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe admin = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
-		ligue.setAdministrateur(admin);
-		assertEquals(admin, ligue.getAdministrateur());
-
-	}
-	@Test
 	
-	void testSetAdministrateur() throws SauvegardeImpossible
+	@Test
+	void SetNom() throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe admin = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
-		ligue.setAdministrateur(admin);
-		assertEquals(admin, ligue.getAdministrateur());
+		ligue.setNom("VolleyBall");
+		assertEquals("VolleyBall", ligue.getNom());
+	}
+	
+	@Test
+	void GetAdministrateur () throws SauvegardeImpossible
+	{
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
+		ligue.setAdministrateur (employe);
+		assertEquals(employe, ligue.getAdministrateur());
 		
 	}
 	
 	@Test
-	void testGetEmploye () throws SauvegardeImpossible
+	void SetAdministrateur () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
 		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
-		Employe admin = ligue.addEmploye("Hadrien", "Bernard", "B.rongier@gmail.com", "qwerty");
-		assertEquals(employe, ligue.getEmployes().first());
-        assertEquals(admin, ligue.getEmployes().last());
+		ligue.setAdministrateur (employe);
+		assertEquals(employe, ligue.getAdministrateur());
+		
 	}
+	
 	@Test
-	void TestRemove() throws SauvegardeImpossible
-    {
-        Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-        Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
-        employe.remove();
-        assertEquals(0, ligue.getEmployes().size());
-    }
+	void GetEmployes () throws SauvegardeImpossible
+	{
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		Employe employe1 = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty");
+		Employe employe2 = ligue.addEmploye("Dupont", "Pierre", "p.dupont@gmail.com", "azerty");
+		assertEquals(employe1, ligue.getEmployes().first());
+		assertEquals(employe2, ligue.getEmployes().last());
+		
+	}
+	
 	@Test
-    void TestCompareTo() throws SauvegardeImpossible
-    {
-        Ligue flechettes = gestionPersonnel.addLigue("Basketball");
-        Ligue basketball = gestionPersonnel.addLigue("Basketball");
-        assertEquals(0, basketball.compareTo(flechettes));
-    }
+	void Remove () throws SauvegardeImpossible
+	{
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		ligue.remove ();
+		assertEquals(false, gestionPersonnel.getLigues().equals(ligue));	
+	}
+	
 	@Test
-    void TestToString() throws SauvegardeImpossible
-    {
-        Ligue basketball = gestionPersonnel.addLigue("Basketball");
-        assertEquals("Basketball", basketball.toString());
-    }
-}
+	void CompareTo() throws SauvegardeImpossible
+	{
+		Ligue ligue1 = gestionPersonnel.addLigue("Fléchettes");
+		Ligue ligue2 = gestionPersonnel.addLigue("Equitation");
+		assertEquals(0, ligue1.compareTo(ligue1));
+		assertEquals(1, ligue1.compareTo(ligue2));
+	}
+	
+	@Test
+	void ToString () throws SauvegardeImpossible
+	{
+		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
+		assertEquals("Fléchettes", ligue.toString());
+	}
+	
+	
+	
+}	

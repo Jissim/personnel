@@ -1,6 +1,7 @@
 package personnel;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * Employé d'une ligue hébergée par la M2L. Certains peuvent 
@@ -16,8 +17,9 @@ public class Employe implements Serializable, Comparable<Employe>
 	private String nom, prenom, password, mail;
 	private Ligue ligue;
 	private GestionPersonnel gestionPersonnel;
+	private LocalDate dateArrivee, dateDepart;
 	
-	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password)
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password /**LocalDate //dateDepart*/)
 	{
 		this.gestionPersonnel = gestionPersonnel;
 		this.nom = nom;
@@ -25,6 +27,40 @@ public class Employe implements Serializable, Comparable<Employe>
 		this.password = password;
 		this.mail = mail;
 		this.ligue = ligue;
+//		this.dateArrivee = LocalDate.now(); //		utilisée pour obtenir la date actuelle à partir de l'horloge système
+															//		dans le fuseau horaire par défaut. 
+//		this.dateDepart = dateDepart;
+
+	}
+	
+	/**
+	 * Retourne la date d'arrivée.
+	 * @return la date d'arrivée.
+	 */
+	
+	public LocalDate getDateArrivee()
+	{
+		return this.dateArrivee;
+	}
+	
+	/**
+	 * Retourne la date de départ.
+	 * @return la date de départ.
+	 */
+	
+	public LocalDate getDateDepart()
+	{
+		return this.dateDepart;
+	}
+	
+	/**
+	 * Change la date de départ.
+	 * @param date la nouvelle date de départ. 
+	 */
+	
+	public void setDateDepart(LocalDate dateDepart)
+	{
+		this.dateDepart = dateDepart;
 	}
 	
 	/**

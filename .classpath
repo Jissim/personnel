@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry excluding="commandLine/" kind="src" path="Personnel/src"/>
-	<classpathentry kind="src" path="Personnel/src/commandLine"/>
-	<classpathentry kind="output" path="bin"/>
-</classpath>

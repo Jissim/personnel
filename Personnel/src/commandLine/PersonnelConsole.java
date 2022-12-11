@@ -1,4 +1,4 @@
-Rpackage commandLine;
+package commandLine;
 
 import personnel.*;
 import commandLineMenus.*;
@@ -75,7 +75,7 @@ public class PersonnelConsole
 	{
 		PersonnelConsole personnelConsole = 
 				new PersonnelConsole(GestionPersonnel.getGestionPersonnel());
-		if (personnelConsole.verifiePassword())X
+		if (personnelConsole.verifiePassword())
 			personnelConsole.start();
 	}
 }
