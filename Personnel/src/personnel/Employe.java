@@ -19,6 +19,23 @@ public class Employe implements Serializable, Comparable<Employe>
 	private GestionPersonnel gestionPersonnel;
 	private LocalDate dateArrivee, dateDepart;
 	
+	
+	/* CDI*/
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password)
+	{
+		this.gestionPersonnel = gestionPersonnel;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.password = password;
+		this.mail = mail;
+		this.ligue = ligue;
+		this.dateArrivee = LocalDate.now(); //		utilisée pour obtenir la date actuelle à partir de l'horloge système
+															//		dans le fuseau horaire par défaut. 
+		this.dateDepart = null;
+
+	}
+	
+	/*CDD*/
 	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateDepart)
 	{
 		this.gestionPersonnel = gestionPersonnel;

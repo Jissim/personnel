@@ -108,7 +108,14 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 * @param password le password de l'employé.
 	 * @return l'employé créé. 
 	 */
-
+	
+	public Employe addEmploye(String nom, String prenom, String mail, String password)
+	{
+		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password);
+		employes.add(employe);
+		return employe;
+	}	
+	
 	public Employe addEmploye(String nom, String prenom, String mail, String password, LocalDate dateDepart)
 	{
 		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password, dateDepart);
