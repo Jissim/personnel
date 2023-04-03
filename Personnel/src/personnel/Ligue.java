@@ -28,10 +28,10 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 * @param nom le nom de la ligue.
 	 */
 	
-	Ligue(GestionPersonnel gestionPersonnel, String nom) throws SauvegardeImpossible
+	public Ligue(GestionPersonnel gestionPersonnel, String nom) throws SauvegardeImpossible
 	{
 		this(gestionPersonnel, -1, nom);
-		this.id = gestionPersonnel.insert(this); 
+		this.id = gestionPersonnel.Insert(this); 
 	}
 
 	Ligue(GestionPersonnel gestionPersonnel, int id, String nom)
@@ -42,6 +42,17 @@ public class Ligue implements Serializable, Comparable<Ligue>
 		administrateur = gestionPersonnel.getRoot();
 		this.id = id;
 	}
+	
+	private void Update() {
+		// TODO Auto-generated method stub
+		try {
+			gestionPersonnel.Update(this);
+		} catch (SauvegardeImpossible e) {
+			
+			e.printStackTrace();
+		}
+	}
+		
 
 	/**
 	 * Retourne le nom de la ligue.
@@ -61,7 +72,9 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	public void setNom(String nom)
 	{
 		this.nom = nom;
+		this.Update();
 	}
+
 
 	/**
 	 * Retourne l'administrateur de la ligue.
@@ -109,19 +122,20 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 * @return l'employé créé. 
 	 */
 	
-	public Employe addEmploye(String nom, String prenom, String mail, String password)
+
+	public Employe addEmploye(String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)
 	{
-		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password);
+		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password, dateArrivee, dateDepart);
 		employes.add(employe);
-		return employe;
-	}	
-	
-	public Employe addEmploye(String nom, String prenom, String mail, String password, LocalDate dateDepart)
-	{
-		Employe employe = new Employe(this.gestionPersonnel, this, nom, prenom, mail, password, dateDepart);
-		employes.add(employe);
+		
+		try {
+			employe.setId(gestionPersonnel.Insert(employe));
+		} catch (SauvegardeImpossible e) {
+			e.printStackTrace();
+		}
 		return employe;
 	}
+	
 	
 	void remove(Employe employe)
 	{
@@ -131,9 +145,10 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	/**
 	 * Supprime la ligue, entraîne la suppression de tous les employés
 	 * de la ligue.
+	 * @throws SauvegardeImpossible 
 	 */
 	
-	public void remove()
+	public void remove() throws SauvegardeImpossible
 	{
 		gestionPersonnel.remove(this);
 	}
@@ -149,5 +164,10 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	public String toString()
 	{
 		return nom;
+	}
+
+	public int getId() {
+		// TODO Auto-generated method stub
+		return id;
 	}
 }

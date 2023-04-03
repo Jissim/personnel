@@ -21,7 +21,7 @@ GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	void addEmploye() throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20))); 
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20))); 
 		assertEquals(employe, ligue.getEmployes().first());
 	}
 	
@@ -29,7 +29,7 @@ GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	void GetDateArrivee ()throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
 		assertEquals(LocalDate.now(), employe.getDateArrivee());
 		
 	}
@@ -39,7 +39,7 @@ GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	void GetDateDepart () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
 		assertEquals((LocalDate.of(2023, 12, 20)), employe.getDateDepart());
 		
 	}
@@ -48,7 +48,7 @@ GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	void SetDateDepart () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
 		employe.setDateDepart((LocalDate.of(2023, 10, 10)));
 		assertEquals((LocalDate.of(2023, 10, 10)), employe.getDateDepart());
 	}
@@ -59,8 +59,8 @@ GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	void estAdmin () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe1 = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
-		Employe employe2 = ligue.addEmploye("Dupont", "Pierre", "p.dupont@gmail.com", "azerty",(LocalDate.of(2023, 04, 20)));
+		Employe employe1 = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
+		Employe employe2 = ligue.addEmploye("Dupont", "Pierre", "p.dupont@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 04, 20)));
 		ligue.setAdministrateur (employe1);
 		assertEquals(true, employe1.estAdmin(ligue));
 		assertEquals(false, employe2.estAdmin(ligue));
@@ -74,8 +74,8 @@ GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	void estRoot () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe1 = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
-		Employe employe2 = ligue.addEmploye("Dupont", "Pierre", "p.dupont@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
+		Employe employe1 = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
+		Employe employe2 = ligue.addEmploye("Dupont", "Pierre", "p.dupont@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
 		 employe1 = gestionPersonnel.getRoot();
 		 assertEquals(true, employe1.estRoot());
 		 assertEquals(false, employe2.estRoot()); 
@@ -85,7 +85,7 @@ GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	void GetNom () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
 		assertEquals("Bouchard", employe.getNom());
 	}
 	
@@ -93,7 +93,7 @@ GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	void SetNom () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
 		employe.setNom("Boulanger");
 		assertEquals("Boulanger", employe.getNom());
 	}
@@ -102,7 +102,7 @@ GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	void GetPrenom () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
 		assertEquals("Gérard", employe.getPrenom());
 	}
 	
@@ -110,7 +110,7 @@ GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	void SetPrenomNom () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
 		employe.setPrenom("Patrick");
 		assertEquals("Patrick", employe.getPrenom());
 	}
@@ -118,7 +118,7 @@ GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	void GetMail () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
 		assertEquals("g.bouchard@gmail.com", employe.getMail());
 	}
 	
@@ -126,7 +126,7 @@ GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	void SetMail () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
 		employe.setMail("gerard.bouchard@gmail.com");
 		assertEquals("gerard.bouchard@gmail.com", employe.getMail());
 	}
@@ -135,7 +135,7 @@ GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	void CheckPassword () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
 		assertEquals(true, employe.checkPassword("azerty"));
 		assertEquals(false, employe.checkPassword("qwerty"));
 	}
@@ -144,7 +144,7 @@ GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	void SetPasswordl () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
 		employe.setPassword("qwerty");
 		assertEquals(true, employe.checkPassword("qwerty"));
 		assertEquals(false, employe.checkPassword("azerty"));
@@ -154,7 +154,7 @@ GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	void GetLigue () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
 		assertEquals(ligue, employe.getLigue());
 	}
 	
@@ -162,8 +162,8 @@ GestionPersonnel gestionPersonnel = GestionPersonnel.getGestionPersonnel();
 	void CompareTo() throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe1 = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
-		Employe employe2 = ligue.addEmploye("Dupont", "Pierre", "p.dupontd@gmail.com", "azerty",(LocalDate.of(2023, 04, 20)));
+		Employe employe1 = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
+		Employe employe2 = ligue.addEmploye("Dupont", "Pierre", "p.dupontd@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 04, 20)));
 		assertEquals(0, employe1.compareTo(employe1));
 		assertEquals(-2, employe1.compareTo(employe2));
 	}

@@ -24,7 +24,7 @@ class TestLigue
 	void addEmploye() throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20))); 
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20))); 
 		assertEquals(employe, ligue.getEmployes().first());
 	}
 
@@ -47,7 +47,7 @@ class TestLigue
 	void GetAdministrateur () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
 		ligue.setAdministrateur (employe);
 		assertEquals(employe, ligue.getAdministrateur());
 		
@@ -57,7 +57,7 @@ class TestLigue
 	void SetAdministrateur () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
+		Employe employe = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
 		ligue.setAdministrateur (employe);
 		assertEquals(employe, ligue.getAdministrateur());
 		
@@ -67,8 +67,8 @@ class TestLigue
 	void GetEmployes () throws SauvegardeImpossible
 	{
 		Ligue ligue = gestionPersonnel.addLigue("Fléchettes");
-		Employe employe1 = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
-		Employe employe2 = ligue.addEmploye("Dupont", "Pierre", "p.dupont@gmail.com", "azerty",(LocalDate.of(2023, 12, 20)));
+		Employe employe1 = ligue.addEmploye("Bouchard", "Gérard", "g.bouchard@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
+		Employe employe2 = ligue.addEmploye("Dupont", "Pierre", "p.dupont@gmail.com", "azerty",LocalDate.now(),(LocalDate.of(2023, 12, 20)));
 		assertEquals(employe1, ligue.getEmployes().first());
 		assertEquals(employe2, ligue.getEmployes().last());
 		

@@ -2,6 +2,8 @@ package personnel;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * Employé d'une ligue hébergée par la M2L. Certains peuvent 
@@ -18,10 +20,33 @@ public class Employe implements Serializable, Comparable<Employe>
 	private Ligue ligue;
 	private GestionPersonnel gestionPersonnel;
 	private LocalDate dateArrivee, dateDepart;
+	private int id_employe;
 	
+	Employe(GestionPersonnel gestionPersonnel, int id, String nom)
+	{
+		this.nom = nom;
+		new TreeSet<>();
+		this.gestionPersonnel = gestionPersonnel;
+		this.id_employe = id;
+	}
 	
-	/* CDI*/
-	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password)
+	//CDD
+	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart)
+	{
+		this.gestionPersonnel = gestionPersonnel;
+		this.nom = nom;
+		this.prenom = prenom;
+		this.password = password;
+		this.mail = mail;
+		this.ligue = ligue;
+		this.dateArrivee = LocalDate.now(); //		utilisée pour obtenir la date actuelle à partir de l'horloge système
+															//		dans le fuseau horaire par défaut. 
+		
+		this.dateDepart = dateDepart;
+	}
+	
+	//CDI
+	/*Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateDepart)
 	{
 		this.gestionPersonnel = gestionPersonnel;
 		this.nom = nom;
@@ -33,22 +58,14 @@ public class Employe implements Serializable, Comparable<Employe>
 															//		dans le fuseau horaire par défaut. 
 		this.dateDepart = null;
 
+	}*/
+	
+	
+	private void UpdateEmploye(String string) throws SauvegardeImpossible {
+		// TODO Auto-generated method stub
+		gestionPersonnel.UpdateEmploye(this, string);
 	}
 	
-	/*CDD*/
-	Employe(GestionPersonnel gestionPersonnel, Ligue ligue, String nom, String prenom, String mail, String password, LocalDate dateDepart)
-	{
-		this.gestionPersonnel = gestionPersonnel;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.password = password;
-		this.mail = mail;
-		this.ligue = ligue;
-		this.dateArrivee = LocalDate.now(); //		utilisée pour obtenir la date actuelle à partir de l'horloge système
-															//		dans le fuseau horaire par défaut. 
-		this.dateDepart = dateDepart;
-
-	}
 	
 	/**
 	 * Retourne la date d'arrivée.
@@ -68,6 +85,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	public LocalDate getDateDepart()
 	{
 		return this.dateDepart;
+		
 	}
 	
 	/**
@@ -78,6 +96,11 @@ public class Employe implements Serializable, Comparable<Employe>
 	public void setDateDepart(LocalDate dateDepart)
 	{
 		this.dateDepart = dateDepart;
+		try {
+			this.UpdateEmploye("dateArrivee_employe");
+		} catch (SauvegardeImpossible e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -122,7 +145,14 @@ public class Employe implements Serializable, Comparable<Employe>
 	public void setNom(String nom)
 	{
 		this.nom = nom;
+		try {
+			this.UpdateEmploye("nom_employe");
+		} catch (SauvegardeImpossible e) {
+			e.printStackTrace();
+		}
 	}
+
+	
 
 	/**
 	 * Retourne le prénom de l'employé.
@@ -142,6 +172,11 @@ public class Employe implements Serializable, Comparable<Employe>
 	public void setPrenom(String prenom)
 	{
 		this.prenom = prenom;
+		try {
+			this.UpdateEmploye("prenom_employe");
+		} catch (SauvegardeImpossible e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -162,6 +197,11 @@ public class Employe implements Serializable, Comparable<Employe>
 	public void setMail(String mail)
 	{
 		this.mail = mail;
+		try {
+			this.UpdateEmploye("mail_employe");
+		} catch (SauvegardeImpossible e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -176,6 +216,11 @@ public class Employe implements Serializable, Comparable<Employe>
 	{
 		return this.password.equals(password);
 	}
+	
+	public String getPassword()
+	{
+		return password;
+	}
 
 	/**
 	 * Change le password de l'employé.
@@ -185,6 +230,11 @@ public class Employe implements Serializable, Comparable<Employe>
 	public void setPassword(String password)
 	{
 		this.password= password;
+		try {
+			this.UpdateEmploye("password_employe");
+		} catch (SauvegardeImpossible e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -233,5 +283,16 @@ public class Employe implements Serializable, Comparable<Employe>
 		else
 			res += ligue.toString();
 		return res + ")";
+	}
+
+	public int getId() {
+		// TODO Auto-generated method stub
+		return id_employe;
+	}
+
+	public void setId(int id) {
+		// TODO Auto-generated method stub
+		this.id_employe = id;
+		
 	}
 }

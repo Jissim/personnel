@@ -1,6 +1,7 @@
 package personnel;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -20,7 +21,8 @@ public class GestionPersonnel implements Serializable
 	private static final long serialVersionUID = -105283113987886425L;
 	private static GestionPersonnel gestionPersonnel = null;
 	private SortedSet<Ligue> ligues;
-	private Employe root = new Employe(this, null, "root", "", "", "toor", null);
+	private SortedSet<Employe> employes;
+	private Employe root = new Employe(this, null, "root", "", "", "toor",null, null);
 	public final static int SERIALIZATION = 1, JDBC = 2, 
 			TYPE_PASSERELLE = SERIALIZATION;  
 	private static Passerelle passerelle = TYPE_PASSERELLE == JDBC ? new jdbc.JDBC() : new serialisation.Serialization();	
@@ -84,7 +86,16 @@ public class GestionPersonnel implements Serializable
 	{
 		Ligue ligue = new Ligue(this, nom); 
 		ligues.add(ligue);
+		passerelle.Insert(ligue);
 		return ligue;
+	}
+	
+	public Employe addEmploye(Ligue id, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart) throws SauvegardeImpossible {
+		   Employe employe = new Employe(this, id, nom, prenom, mail, password, dateArrivee, dateDepart);
+		    employes.add(employe);
+			passerelle.Insert(employe);
+		
+		return employe;
 	}
 	
 	public Ligue addLigue(int id, String nom)
@@ -93,17 +104,59 @@ public class GestionPersonnel implements Serializable
 		ligues.add(ligue);
 		return ligue;
 	}
-
-	void remove(Ligue ligue)
+	
+	public Employe addEmploye(int id, String nom) throws SauvegardeImpossible
 	{
-		ligues.remove(ligue);
+		Employe employe = new Employe(this, id, nom);
+		employes.add(employe);
+		passerelle.Insert(employe);
+		return employe;
+	}
+
+	
+	int Insert(Ligue ligue) throws SauvegardeImpossible
+	{
+		return passerelle.Insert(ligue);
+	}
+
+	int Insert(Employe employe) throws SauvegardeImpossible
+	{
+		return passerelle.Insert(employe);
 	}
 	
-	int insert(Ligue ligue) throws SauvegardeImpossible
+	void Update(Ligue ligue) throws SauvegardeImpossible
 	{
-		return passerelle.insert(ligue);
+		passerelle.UpdateLigue(ligue);
 	}
-
+	
+	void UpdateEmploye(Employe employe, String string) throws SauvegardeImpossible
+	{
+		passerelle.UpdateEmploye(employe,string );
+	}
+	
+//	void updateEmployeString(Employe employe) throws SauvegardeImpossible
+//	{
+//		passerelle.UpdateEmployeString(employe);
+//	}
+	
+	 void Delete(Employe employe) throws SauvegardeImpossible
+	{
+	   passerelle.DeleteEmploye(employe);
+		
+	}
+	void Delete(Ligue ligue) throws SauvegardeImpossible
+	{
+			passerelle.DeleteLigue(ligue);
+		
+	}
+	
+	void remove(Ligue ligue) throws SauvegardeImpossible
+	{
+		ligues.remove(ligue);
+		gestionPersonnel.Delete(ligue);
+	}
+		
+	
 	/**
 	 * Retourne le root (super-utilisateur).
 	 * @return le root.

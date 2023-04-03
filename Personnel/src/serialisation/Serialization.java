@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import personnel.Employe;
 import personnel.GestionPersonnel;
 import personnel.Ligue;
 import personnel.SauvegardeImpossible;
@@ -46,8 +47,38 @@ public class Serialization implements personnel.Passerelle
 	}
 	
 	@Override
-	public int insert(Ligue ligue) throws SauvegardeImpossible
+	public int Insert(Ligue ligue) throws SauvegardeImpossible
 	{
 		return -1;
+	}
+
+	@Override
+	public int Insert(Employe employe) throws SauvegardeImpossible {
+		// TODO Auto-generated method stub
+		return -1;
+	}
+
+	@Override
+	public void UpdateLigue(Ligue ligue) throws SauvegardeImpossible {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void UpdateEmploye(Employe employe, String string) throws SauvegardeImpossible {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void DeleteLigue(Ligue ligue) throws SauvegardeImpossible {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void DeleteEmploye(Employe employe) throws SauvegardeImpossible {
+		// TODO Auto-generated method stub
+		
 	}
 }
