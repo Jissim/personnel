@@ -67,6 +67,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	/**
 	 * Change le nom.
 	 * @param nom le nouveau nom de la ligue.
+	 * 
 	 */
 
 	public void setNom(String nom)
