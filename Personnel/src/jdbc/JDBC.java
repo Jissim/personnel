@@ -61,7 +61,8 @@ public class JDBC implements Passerelle
 				String	mail = employe.getString("mail_employe");
 	            String	password = employe.getString("password_employe");
 				
-		        LocalDate dateArrivee = employe.getString("dateArrivee_employe") != null ?
+		        LocalDate.now();
+				LocalDate dateArrivee = employe.getString("dateArrivee_employe") != null ?
 		        		                LocalDate.parse(employe.getString("dateArrivee_employe")) : null;
 			    LocalDate dateDepart =  employe.getString("dateDepart_employe") != null ? 
 			    		                LocalDate.parse(employe.getString("dateDepart_employe")) : null;
@@ -126,13 +127,14 @@ public class JDBC implements Passerelle
 		try {
 			
 			PreparedStatement instruction2;
-			instruction2 = connection.prepareStatement("insert into employe (nom_employe, prenom_employe, mail_employe, password_employe, dateArrivee_employe, num_ligue) values(?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+			instruction2 = connection.prepareStatement("insert into employe (nom_employe, prenom_employe, mail_employe, password_employe, dateArrivee_employe,dateDepart_employe, num_ligue) values(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 			instruction2.setString(1, employe.getNom());		
 			instruction2.setString(2, employe.getPrenom());	
 			instruction2.setString(3, employe.getMail());
 			instruction2.setString(4, employe.getPassword());
 			instruction2.setString(5, employe.getDateArrivee() == null ? null :  String.valueOf(employe.getDateArrivee()));
-			instruction2.setInt(6, employe.getLigue().getId());
+			instruction2.setString(6, employe.getDateDepart() == null ? null :  String.valueOf(employe.getDateDepart()));
+			instruction2.setInt(7, employe.getLigue().getId());
 			instruction2.executeUpdate();
 			ResultSet id = instruction2.getGeneratedKeys();
 			id.next();

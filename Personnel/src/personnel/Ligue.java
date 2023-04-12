@@ -119,7 +119,7 @@ public class Ligue implements Serializable, Comparable<Ligue>
 	 * @param prenom le prénom de l'employé.
 	 * @param mail l'adresse mail de l'employé.
 	 * @param password le password de l'employé.
-	 * @return l'employé créé. 
+	 * @return l'employé r. 
 	 */
 	
 
