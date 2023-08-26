@@ -24,7 +24,7 @@ public class GestionPersonnel implements Serializable
 	private SortedSet<Employe> employes;
 	private Employe root = new Employe(this, null, "root", "", "", "toor",null, null);
 	public final static int SERIALIZATION = 1, JDBC = 2, 
-			TYPE_PASSERELLE = SERIALIZATION;  
+			TYPE_PASSERELLE = JDBC;  
 	private static Passerelle passerelle = TYPE_PASSERELLE == JDBC ? new jdbc.JDBC() : new serialisation.Serialization();	
 	
 	/**
@@ -86,14 +86,13 @@ public class GestionPersonnel implements Serializable
 	{
 		Ligue ligue = new Ligue(this, nom); 
 		ligues.add(ligue);
-		passerelle.Insert(ligue);
 		return ligue;
 	}
 	
 	public Employe addEmploye(Ligue id, String nom, String prenom, String mail, String password, LocalDate dateArrivee, LocalDate dateDepart) throws SauvegardeImpossible {
 		   Employe employe = new Employe(this, id, nom, prenom, mail, password, dateArrivee, dateDepart);
 		    employes.add(employe);
-			passerelle.Insert(employe);
+
 		
 		return employe;
 	}
@@ -109,7 +108,6 @@ public class GestionPersonnel implements Serializable
 	{
 		Employe employe = new Employe(this, id, nom);
 		employes.add(employe);
-		passerelle.Insert(employe);
 		return employe;
 	}
 

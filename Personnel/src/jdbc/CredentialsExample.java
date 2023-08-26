@@ -6,13 +6,14 @@ public class CredentialsExample
 	private static String driverClassName = "com.mysql.cj.jdbc.Driver";
 	private static String host = "localhost";
 	private static String port = "3306";
+	private static String Timezone ="?serverTimezone=Europe/Paris";
 	private static String database = "";
 	private static String user = "";
 	private static String password = "";
 	
 	static String getUrl() 
 	{
-		return "jdbc:" + driver + "://" + host + ":" + port + "/" + database ;
+		return "jdbc:" + driver + "://" + host + ":" + port + "/" + database + database + Timezone;
 	}
 	
 	static String getDriverClassName()

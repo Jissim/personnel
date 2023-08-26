@@ -97,7 +97,7 @@ public class Employe implements Serializable, Comparable<Employe>
 	{
 		this.dateDepart = dateDepart;
 		try {
-			this.UpdateEmploye("dateArrivee_employe");
+			this.UpdateEmploye("dateDepart_employe");
 		} catch (SauvegardeImpossible e) {
 			e.printStackTrace();
 		}
